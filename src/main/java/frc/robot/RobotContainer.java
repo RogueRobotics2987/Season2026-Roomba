@@ -21,6 +21,9 @@ import frc.robot.commands.VisionCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.commands.TurretLineupCommand;
+import frc.robot.subsystems.TurretSubsystem;
+
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -38,6 +41,8 @@ public class RobotContainer {
     private final CommandXboxController joystick = new CommandXboxController(0);
 
     private final VisionSubsystem visionSubsystem = new VisionSubsystem();
+
+    private final TurretSubsystem turretSubsystem = new TurretSubsystem();
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
@@ -82,6 +87,7 @@ public class RobotContainer {
         joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         joystick.rightBumper().whileTrue(new VisionCommand(drivetrain));
+        //joystick.rightBumper().whileTrue(new TurretLineupCommand(turretSubsystem));
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
