@@ -11,12 +11,14 @@ import frc.robot.LimelightHelpers;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TurretLineupCommand extends Command {
+  //missing private final subsystem m_subsystem
   public double goalOffset;
   public double turretAngle;
   public double Tz;
-  private TurretSubsystem m_TurretSubsystem;
+  private final TurretSubsystem m_TurretSubsystem; //added final
  
- 
+  //missing @param subsystem
+
   /** Creates a new TurretLineupCommand. */
   public TurretLineupCommand(TurretSubsystem TurretSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,7 +41,7 @@ public class TurretLineupCommand extends Command {
     turretAngle = Math.atan(Tz + goalOffset / Tx);
     SmartDashboard.putNumber("Turret Angle: ", turretAngle);
 
-    //m_TurretSubsystem.setTurretAngle(0.1);
+    //m_TurretSubsystem.setTurretAngle(0.1);todo
   
   
   }
