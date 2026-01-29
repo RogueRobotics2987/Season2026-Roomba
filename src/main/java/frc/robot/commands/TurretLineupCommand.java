@@ -8,6 +8,7 @@ import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.LimelightHelpers;
+import frc.robot.subsystems.TurretSubsystem; //todo
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TurretLineupCommand extends Command {
@@ -15,7 +16,7 @@ public class TurretLineupCommand extends Command {
   public double goalOffset;
   public double turretAngle;
   public double Tz;
-  private final TurretSubsystem m_TurretSubsystem; //added final
+  private final TurretSubsystem m_TurretSubsystem; //added final //cant have
  
   //missing @param subsystem
 
@@ -41,7 +42,7 @@ public class TurretLineupCommand extends Command {
     turretAngle = Math.atan(Tz + goalOffset / Tx);
     SmartDashboard.putNumber("Turret Angle: ", turretAngle);
 
-    //m_TurretSubsystem.setTurretAngle(0.1);todo
+    m_TurretSubsystem.setTurretAngle(0.1); //todo
   
   
   }

@@ -5,15 +5,16 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Subsystem;
-//import edu.wpi.first.wpilibj.motorcontrol.Spark;todo
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class TurretSubsystem implements Subsystem  {
   
-  //final Spark m_motor = new Spark(26); todo
+  final SparkMax m_motor = new SparkMax(26, MotorType.kBrushless);// todo
 
-  //public void setTurretAngle(double turretAngle){ todo
-   // m_motor.set(0.1);todo
- // }todo
+  public void setTurretAngle(double turretAngle){// todo
+    m_motor.set(0.1);//todo
+  }//todo
   
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
