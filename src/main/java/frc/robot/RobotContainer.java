@@ -17,11 +17,9 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-import frc.robot.commands.VisionCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.commands.TurretLineupCommand;
+import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 
@@ -40,11 +38,11 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    private final VisionSubsystem visionSubsystem = new VisionSubsystem();
-
     private final TurretSubsystem turretSubsystem = new TurretSubsystem();
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+
+    private final ApriltagSubsystem visionSubsystem = new ApriltagSubsystem(drivetrain);
 
     public SlewRateLimiter filter = new SlewRateLimiter(8); // 8 / s
 
@@ -86,7 +84,6 @@ public class RobotContainer {
         joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        joystick.rightBumper().whileTrue(new VisionCommand(drivetrain));
         //joystick.rightBumper().whileTrue(new TurretLineupCommand(turretSubsystem));
 
         // reset the field-centric heading on left bumper press
