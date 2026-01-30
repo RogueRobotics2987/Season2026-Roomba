@@ -13,7 +13,7 @@ public class TurretSubsystem implements Subsystem  {
   final SparkMax m_motor = new SparkMax(26, MotorType.kBrushless);// todo
 
   public void setTurretAngle(double turretAngle){// todo
-    m_motor.set(0.1);//todo
+    m_motor.set(turretAngle);//todo
   }//todo
   
   /** Creates a new TurretSubsystem. */
