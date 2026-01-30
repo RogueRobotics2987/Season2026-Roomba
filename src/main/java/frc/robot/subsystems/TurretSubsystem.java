@@ -5,16 +5,24 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Subsystem;
+//import com.revrobotics.spark.SparkClosedLoopController;todo
+import edu.wpi.first.math.controller.PIDController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 public class TurretSubsystem implements Subsystem  {
   
-  final SparkMax m_motor = new SparkMax(26, MotorType.kBrushless);// todo
+  final SparkMax m_motor = new SparkMax(26, MotorType.kBrushless);
+  //final SparkClosedLoopController m_ClosedLoopController = m_motor.getClosedLoopController();todo
+  double kp = 1;
+  double ki = 1;
+  double kd = 1;
+  PIDController PID = new PIDController(kp, ki, kd);
 
-  public void setTurretAngle(double turretAngle){// todo
-    m_motor.set(turretAngle);//todo
-  }//todo
+
+  public void setTurretAngle(double turretAngle){
+    m_motor.set(turretAngle);
+  }
   
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
