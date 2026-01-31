@@ -14,6 +14,7 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -43,6 +44,7 @@ public class RobotContainer {
 
     public SlewRateLimiter filter = new SlewRateLimiter(8); // 8 / s
 
+    private boolean brakeEnabled = false;
     public RobotContainer() {
         configureBindings();
     }
@@ -56,10 +58,19 @@ public class RobotContainer {
                 double value = Math.min(joystick.getRightTriggerAxis() + 0.25, 1);
                 Voltage outputMultiplier = Volts.of(filter.calculate(value));
 
-                return drive.withVelocityX(joystick.getLeftY() * MaxSpeed * outputMultiplier.magnitude()) // Drive forward with negative Y (forward)
-                    .withVelocityY(joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+                if (brakeEnabled &&
+                    joystick.getLeftX() > -0.1 && joystick.getLeftX() < 0.1 &&
+                    joystick.getLeftY() > -0.1 && joystick.getLeftY() < 0.1 &&
+                    joystick.getRightX() > -0.1 && joystick.getRightX() < 0.1
+                ){
+                    return brake;
+                } else {
+                    return drive.withVelocityX(joystick.getLeftY() * MaxSpeed * outputMultiplier.magnitude()) // Drive forward with negative Y (forward)
+                        .withVelocityY(joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+                        .withRotationalRate(-joystick.getRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+                }
             })
+             
         );
 
         // Idle while the robot is disabled. This ensures the configured
@@ -69,7 +80,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
-        joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
+        joystick.a().onTrue(new InstantCommand(() -> brakeEnabled = !brakeEnabled));
         joystick.b().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
         ));
