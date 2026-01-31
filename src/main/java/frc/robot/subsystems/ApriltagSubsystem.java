@@ -1,10 +1,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 
 public class ApriltagSubsystem extends SubsystemBase {
  
@@ -16,9 +19,13 @@ public class ApriltagSubsystem extends SubsystemBase {
   private CommandSwerveDrivetrain AT_driveTrain;
   private boolean rejectUpdate = false;
 
+  private final Field2d field = new Field2d();
+
   /** Creates a new ExampleSubsystem. */
   public ApriltagSubsystem(CommandSwerveDrivetrain AT_driveTrain) {
     this.AT_driveTrain = AT_driveTrain;
+
+    SmartDashboard.putData("Field", field); 
     // Constructor for the subsystem, used for initial setup and instantiation of components.
   }
 
@@ -52,11 +59,14 @@ public class ApriltagSubsystem extends SubsystemBase {
       AT_driveTrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
       AT_driveTrain.addVisionMeasurement(mt2.pose, mt2.timestampSeconds);
       System.out.println("Yippee");
-      SmartDashboard.putNumber("X", mt2.pose.getX());
-      SmartDashboard.putNumber("Y", mt2.pose.getY());
-      SmartDashboard.putNumber("Rotation", mt2.pose.getRotation().getDegrees());
+
+      SmartDashboard.putNumber("Limelight X", mt2.pose.getX());
+      SmartDashboard.putNumber("LimelightY", mt2.pose.getY());
+      SmartDashboard.putNumber("Limelight Rotation", mt2.pose.getRotation().getDegrees());
     }  
 
+    field.setRobotPose((AT_driveTrain.getState().Pose));
+    SmartDashboard.putData("Pose", field);
   }
 
   // Public methods to control the subsystem's components (e.g., setting motor speeds, reading sensor data)

@@ -38,11 +38,11 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    private final TurretSubsystem turretSubsystem = new TurretSubsystem();
-
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
     private final ApriltagSubsystem visionSubsystem = new ApriltagSubsystem(drivetrain);
+
+    private final TurretSubsystem turretSubsystem = new TurretSubsystem(drivetrain);
 
     public SlewRateLimiter filter = new SlewRateLimiter(8); // 8 / s
 
