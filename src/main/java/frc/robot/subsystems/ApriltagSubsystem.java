@@ -4,6 +4,7 @@ import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ApriltagSubsystem extends SubsystemBase {
  
@@ -28,7 +29,7 @@ public class ApriltagSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    System.out.println("Nope");
+    // System.out.println("Yeah Periodic");
 
     // This method will be called once per scheduler run.
     LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
@@ -51,6 +52,9 @@ public class ApriltagSubsystem extends SubsystemBase {
       AT_driveTrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
       AT_driveTrain.addVisionMeasurement(mt2.pose, mt2.timestampSeconds);
       System.out.println("Yippee");
+      SmartDashboard.putNumber("X", mt2.pose.getX());
+      SmartDashboard.putNumber("Y", mt2.pose.getY());
+      SmartDashboard.putNumber("Rotation", mt2.pose.getRotation().getDegrees());
     }  
 
   }
