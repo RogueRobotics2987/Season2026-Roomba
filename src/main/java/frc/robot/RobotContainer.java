@@ -86,7 +86,7 @@ public class RobotContainer {
         joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        // joystick.rightBumper().whileTrue(new VisionCommand(drivetrain));//todo
+        // joystick.rightBumper().whileTrue(new VisionCommand(drivetrain));
         joystick.rightBumper().toggleOnTrue(new TurretLineupCommand(turretSubsystem));
 
         // reset the field-centric heading on left bumper press

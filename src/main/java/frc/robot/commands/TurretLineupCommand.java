@@ -37,12 +37,12 @@ public class TurretLineupCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double Tx = LimelightHelpers.getTX ("limelight");
+    //double Tx = LimelightHelpers.getTX ("limelight");
 
-    turretAngle = Math.atan(Tz + goalOffset / Tx);
-    SmartDashboard.putNumber("Turret Angle: ", turretAngle);
+    //turretAngle = Math.atan(Tz + goalOffset / Tx);
+    //SmartDashboard.putNumber("Turret Angle: ", turretAngle);
 
-    m_TurretSubsystem.setTurretAngle(0.1); //todo
+    m_TurretSubsystem.setTurretAngle(10);
   
   
   }
