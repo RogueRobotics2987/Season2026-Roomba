@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right_Side_Trench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LeftTren_Climb"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Climb_Left"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "2nd Path",
+  "choreoAuto": false
+}

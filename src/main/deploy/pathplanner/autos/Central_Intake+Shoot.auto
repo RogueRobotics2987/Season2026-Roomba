@@ -1,0 +1,25 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle_Trench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Central-Shoot_Intake"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "3rd Path",
+  "choreoAuto": false
+}

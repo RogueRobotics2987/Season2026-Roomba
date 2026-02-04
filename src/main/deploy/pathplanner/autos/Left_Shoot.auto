@@ -1,0 +1,25 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left_Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Ball Intake"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "1st Path",
+  "choreoAuto": false
+}

@@ -1,0 +1,49 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left_Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shoot_Outpost"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Outpost_Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "shoot_bump"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Netrual_Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Netural_Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "1st Path",
+  "choreoAuto": false
+}

@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle_Trench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Central_Shoot_Bump"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Netrual_Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right_Neutral_Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right_Shoot"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "5th path",
+  "choreoAuto": false
+}

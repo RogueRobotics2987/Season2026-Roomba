@@ -22,9 +22,13 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
+import com.pathplanner.lib.auto.AutoBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+import com.pathplanner.lib.commands.PathPlannerAuto;
 public class RobotContainer {
+    
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
@@ -44,12 +48,17 @@ public class RobotContainer {
     private final ApriltagSubsystem visionSubsystem = new ApriltagSubsystem(drivetrain);
 
     private final TurretSubsystem turretSubsystem = new TurretSubsystem(drivetrain);
-
+    
     public SlewRateLimiter filter = new SlewRateLimiter(8); // 8 / s
+    
+    private final SendableChooser<Command> autoChooser;
 
     private boolean brakeEnabled = false;
     public RobotContainer() {
         configureBindings();
+        autoChooser = AutoBuilder.buildAutoChooser();
+
+        SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
     private void configureBindings() {
@@ -104,6 +113,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        return autoChooser.getSelected();
     }
 }
