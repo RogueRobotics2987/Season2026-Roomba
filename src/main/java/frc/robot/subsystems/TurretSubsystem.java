@@ -35,11 +35,23 @@ public class TurretSubsystem extends SubsystemBase  {
     double TurretXGlobal = Math.cos(RobotYawRad) * Constants.turretOffsetY + RobotX;
     double TurretYGlobal = Math.sin(RobotYawRad) * Constants.turretOffsetX + RobotY;
 
-    double xDifference = Constants.blueHubX - TurretXGlobal;
-    double yDifference = Constants.blueHubY - TurretYGlobal;
+    double xHubDifference = Constants.blueHubX - TurretXGlobal;
+    double yHubDifference = Constants.blueHubY - TurretYGlobal;
 
-    double turretAngleGlobal = Math.atan(yDifference / xDifference); // calculates the turret angle in degrees
-    SmartDashboard.putNumber("Turret Angle", turretAngleGlobal);
+    double xPassLeftDifference = Constants.bluePassLeftX - TurretXGlobal;
+    double yPassLeftDifference = Constants.bluePassLeftY - TurretXGlobal;
+
+    double xPassRightDifference = Constants.bluePassRightX - TurretXGlobal;
+    double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
+
+    double turretAngleGlobal = Math.atan(yHubDifference / xHubDifference); // calculates the turret angle for the hub in degrees
+    SmartDashboard.putNumber("Turret Angle Hub", turretAngleGlobal);
+
+    double turretAnglePassLeft = Math.atan(yPassLeftDifference / xPassLeftDifference); // calculates the turret angle for passing left in degrees
+    SmartDashboard.putNumber("Turret Angle Pass Left", turretAnglePassLeft);
+
+    double turretAnglePassRight = Math.atan(yPassRightDifference / xPassRightDifference); // calculates the turret angle for passing Right in degrees
+    SmartDashboard.putNumber("Turret Angle Pass Right", turretAnglePassRight);
 
   }
 }
