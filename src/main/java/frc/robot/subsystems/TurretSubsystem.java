@@ -29,6 +29,7 @@ public class TurretSubsystem extends SubsystemBase  {
   public TurretSubsystem(CommandSwerveDrivetrain T_driveTrain) {
     this.T_driveTrain = T_driveTrain;
     
+    // The PID Controller for the turret motor
     var slot0Configs = new Slot0Configs();
     slot0Configs.kP = 10; // An error of 1 rotation results in 2.4 V output
     slot0Configs.kI = 0; // no output for integrated error
@@ -39,9 +40,11 @@ public class TurretSubsystem extends SubsystemBase  {
     // 20 to 1 gear ratio
     double gearRatio = 20.0;
 
+    // Turns on continuos wrap for the turret (doesn't work?)
     var closedLoopGeneral = new ClosedLoopGeneralConfigs();
     closedLoopGeneral.ContinuousWrap = true; 
 
+    // Applys the gear ratio to the config
     var feedback = new FeedbackConfigs();
     feedback.SensorToMechanismRatio =  gearRatio;
     motor.getConfigurator().apply(feedback);
@@ -50,42 +53,44 @@ public class TurretSubsystem extends SubsystemBase  {
   @Override
   public void periodic() {
 
+    // Gets Robot X, Y, Yaw
     double RobotX = T_driveTrain.getState().Pose.getX();
     double RobotY = T_driveTrain.getState().Pose.getY();
     double RobotYawRad = T_driveTrain.getState().Pose.getRotation().getRadians();
 
+    // Calculates the global postion of the turret anywhere on the field
     double TurretXGlobal = Math.cos(RobotYawRad) * Constants.turretOffsetY + RobotX;
     double TurretYGlobal = Math.sin(RobotYawRad) * Constants.turretOffsetX + RobotY;
     SmartDashboard.putNumber("YawRad", RobotYawRad);
 
+    // Calculates the difference in the X, Y for the Hub
     double xHubDifference = Constants.blueHubX - TurretXGlobal;
     double yHubDifference = Constants.blueHubY - TurretYGlobal;
 
+    // Calculates the difference in the X, Y for the Passing Left
     double xPassLeftDifference = Constants.bluePassLeftX - TurretXGlobal;
     double yPassLeftDifference = Constants.bluePassLeftY - TurretXGlobal;
 
+    // Calculates the difference in the X, Y for the Passing Right
     double xPassRightDifference = Constants.bluePassRightX - TurretXGlobal;
     double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
-    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad; // calculates the turret angle for the hub in rads
+    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad; // calculates the turret angle for the Hub in rads
     SmartDashboard.putNumber("Turret Angle Hub", turretAngleGlobal);
 
-    double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad; // calculates the turret angle for passing left in rads
+    double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad; // calculates the turret angle for Passing Left in rads
     SmartDashboard.putNumber("Turret Angle Pass Left", turretAnglePassLeft);
 
-    double turretAnglePassRight = Math.atan2(yPassRightDifference, xPassRightDifference) + RobotYawRad; // calculates the turret angle for passing Right in rads
+    double turretAnglePassRight = Math.atan2(yPassRightDifference, xPassRightDifference) + RobotYawRad; // calculates the turret angle for Passing Right in rads
     SmartDashboard.putNumber("Turret Angle Pass Right", turretAnglePassRight);
 
-    // turretAngleGlobal is in radians
+    double rotations = turretAngleGlobal / (2 * Math.PI); // Converts the turret angle in rads to motor rotation
 
-    // we need to convert the radians to a rotation
-    double rotations = turretAngleGlobal / (2 * Math.PI);
     // This is setting the position in rotations, so pass the converted value in.
     final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
     motor.setControl(m_request.withPosition(rotations));
     SmartDashboard.putNumber("Turret angle setpoint", rotations);
     SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
-
 
   }
 }
