@@ -75,16 +75,20 @@ public class TurretSubsystem extends SubsystemBase  {
     double xPassRightDifference = Constants.bluePassRightX - TurretXGlobal;
     double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
-    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad; // calculates the turret angle for the Hub in rads
+    // Calculates the turret angle for the Hub in rads and outputs the numbers to SmartDashboard
+    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad;
     SmartDashboard.putNumber("Turret Angle Hub", turretAngleGlobal);
 
-    double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad; // calculates the turret angle for Passing Left in rads
+    // Calculates the turret angle for Passing Left in rads and outputs the numbers to SmartDashboard
+    double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad;
     SmartDashboard.putNumber("Turret Angle Pass Left", turretAnglePassLeft);
 
-    double turretAnglePassRight = Math.atan2(yPassRightDifference, xPassRightDifference) + RobotYawRad; // calculates the turret angle for Passing Right in rads
+    // Calculates the turret angle for Passing Right in rads and outputs the numbers to SmartDashboard
+    double turretAnglePassRight = Math.atan2(yPassRightDifference, xPassRightDifference) + RobotYawRad;
     SmartDashboard.putNumber("Turret Angle Pass Right", turretAnglePassRight);
 
-    double rotations = turretAngleGlobal / (2 * Math.PI); // Converts the turret angle in rads to motor rotation
+    // Converts the turret angle in rads to motor rotation
+    double rotations = turretAngleGlobal / (2 * Math.PI);
 
     // This is setting the position in rotations, so pass the converted value in.
     final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
