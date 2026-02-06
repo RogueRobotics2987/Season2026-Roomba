@@ -8,21 +8,43 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.ApriltagSubsystem;
 import edu.wpi.first.math.geometry.Pose2d;
+
+import edu.wpi.first.math.controller.PIDController;
+
+import com.ctre.phoenix6.configs.ClosedLoopGeneralConfigs;
+import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretSubsystem extends SubsystemBase  {
   
   private CommandSwerveDrivetrain T_driveTrain;
-  //final Spark m_motor = new Spark(26); todo
-
-  //public void setTurretAngle(double turretAngle){ todo
-   // m_motor.set(0.1);todo
- // }todo
-  
+  private final TalonFX motor = new TalonFX(20, "rio");
+ 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem(CommandSwerveDrivetrain T_driveTrain) {
     this.T_driveTrain = T_driveTrain;
+    
+    var slot0Configs = new Slot0Configs();
+    slot0Configs.kP = 10; // An error of 1 rotation results in 2.4 V output
+    slot0Configs.kI = 0; // no output for integrated error
+    slot0Configs.kD = 0; // A velocity of 1 rps results in 0.1 V output
+
+    motor.getConfigurator().apply(slot0Configs);
+
+    // 20 to 1 gear ratio
+    double gearRatio = 20.0;
+
+    var closedLoopGeneral = new ClosedLoopGeneralConfigs();
+    closedLoopGeneral.ContinuousWrap = true; 
+
+    var feedback = new FeedbackConfigs();
+    feedback.SensorToMechanismRatio =  gearRatio;
+    motor.getConfigurator().apply(feedback);
   }
 
   @Override
@@ -34,6 +56,7 @@ public class TurretSubsystem extends SubsystemBase  {
 
     double TurretXGlobal = Math.cos(RobotYawRad) * Constants.turretOffsetY + RobotX;
     double TurretYGlobal = Math.sin(RobotYawRad) * Constants.turretOffsetX + RobotY;
+    SmartDashboard.putNumber("YawRad", RobotYawRad);
 
     double xHubDifference = Constants.blueHubX - TurretXGlobal;
     double yHubDifference = Constants.blueHubY - TurretYGlobal;
@@ -44,14 +67,25 @@ public class TurretSubsystem extends SubsystemBase  {
     double xPassRightDifference = Constants.bluePassRightX - TurretXGlobal;
     double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
-    double turretAngleGlobal = Math.atan(yHubDifference / xHubDifference); // calculates the turret angle for the hub in degrees
+    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad; // calculates the turret angle for the hub in rads
     SmartDashboard.putNumber("Turret Angle Hub", turretAngleGlobal);
 
-    double turretAnglePassLeft = Math.atan(yPassLeftDifference / xPassLeftDifference); // calculates the turret angle for passing left in degrees
+    double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad; // calculates the turret angle for passing left in rads
     SmartDashboard.putNumber("Turret Angle Pass Left", turretAnglePassLeft);
 
-    double turretAnglePassRight = Math.atan(yPassRightDifference / xPassRightDifference); // calculates the turret angle for passing Right in degrees
+    double turretAnglePassRight = Math.atan2(yPassRightDifference, xPassRightDifference) + RobotYawRad; // calculates the turret angle for passing Right in rads
     SmartDashboard.putNumber("Turret Angle Pass Right", turretAnglePassRight);
+
+    // turretAngleGlobal is in radians
+
+    // we need to convert the radians to a rotation
+    double rotations = turretAngleGlobal / (2 * Math.PI);
+    // This is setting the position in rotations, so pass the converted value in.
+    final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
+    motor.setControl(m_request.withPosition(rotations));
+    SmartDashboard.putNumber("Turret angle setpoint", rotations);
+    SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
+
 
   }
 }
