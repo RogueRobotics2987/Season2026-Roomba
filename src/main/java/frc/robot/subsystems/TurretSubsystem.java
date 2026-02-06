@@ -40,7 +40,7 @@ public class TurretSubsystem extends SubsystemBase  {
     // 20 to 1 gear ratio
     double gearRatio = 20.0;
 
-    // Turns on continuos wrap for the turret (doesn't work?)
+    // Turns on continuos wrap for the turret (doesn't work documentation lying?)
     var closedLoopGeneral = new ClosedLoopGeneralConfigs();
     closedLoopGeneral.ContinuousWrap = true; 
 
