@@ -48,7 +48,6 @@ public class ApriltagSubsystem extends SubsystemBase {
 
     if (mt2.tagCount == 0) {
       rejectUpdate = true;
-      System.out.println("Nuh uh");
     }
 
     else {
