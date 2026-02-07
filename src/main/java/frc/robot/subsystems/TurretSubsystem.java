@@ -31,14 +31,14 @@ public class TurretSubsystem extends SubsystemBase  {
     
     // The PID Controller for the turret motor
     var slot0Configs = new Slot0Configs();
-    slot0Configs.kP = 40; // An error of 1 rotation results in 2.4 V output
+    slot0Configs.kP = 20; // An error of 1 rotation results in 2.4 V output
     slot0Configs.kI = 0; // no output for integrated error
     slot0Configs.kD = 0; // A velocity of 1 rps results in 0.1 V output
 
     motor.getConfigurator().apply(slot0Configs);
 
-    // 15 to 1 gear ratio
-    double gearRatio = 15.0;
+    // 20 to 1 gear ratio for roomba | 15 to 1 gear ratio for robot
+    double gearRatio = 20.0;
 
     // Turns on continuos wrap for the turret
     var closedLoopGeneral = new ClosedLoopGeneralConfigs();
@@ -65,8 +65,11 @@ public class TurretSubsystem extends SubsystemBase  {
     SmartDashboard.putNumber("YawRad", RobotYawRad);
 
     // Calculates the difference in the X, Y for the Hub
-    double xHubDifference = Constants.blueHubX - TurretXGlobal;
-    double yHubDifference = Constants.blueHubY - TurretYGlobal;
+    double xHubDifference = Constants.redHubX - TurretXGlobal;
+    double yHubDifference = Constants.redHubY - TurretYGlobal;
+
+    SmartDashboard.putNumber("X Difference", xHubDifference);
+    SmartDashboard.putNumber("Y Difference", yHubDifference);
 
     // Calculates the difference in the X, Y for the Passing Left
     double xPassLeftDifference = Constants.bluePassLeftX - TurretXGlobal;
@@ -77,8 +80,8 @@ public class TurretSubsystem extends SubsystemBase  {
     double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
     // Calculates the turret angle for the Hub in rads and outputs the numbers to SmartDashboard
-    double turretAngleGlobal = Math.atan2(yHubDifference, xHubDifference) + RobotYawRad;
-    SmartDashboard.putNumber("Turret Angle Hub", turretAngleGlobal);
+    double turretAngleGlobal = -(Math.atan2(yHubDifference, xHubDifference)) + RobotYawRad;// negitive only when red
+    SmartDashboard.putNumber("rad Turret Angle Hub", turretAngleGlobal);
 
     // Calculates the turret angle for Passing Left in rads and outputs the numbers to SmartDashboard
     double turretAnglePassLeft = Math.atan2(yPassLeftDifference, xPassLeftDifference) + RobotYawRad;
@@ -90,6 +93,7 @@ public class TurretSubsystem extends SubsystemBase  {
 
     // Converts the turret angle in rads to motor rotation
     double rotations = turretAngleGlobal / (2 * Math.PI);
+    SmartDashboard.putNumber("Rotations", rotations);
 
     // This is setting the position in rotations, so pass the converted value in.
     final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank

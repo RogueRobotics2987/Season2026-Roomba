@@ -54,6 +54,7 @@ public class ApriltagSubsystem extends SubsystemBase {
     else {
       rejectUpdate = false;
     }
+    // rejectUpdate = true;
 
     if (!rejectUpdate) {
       AT_driveTrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5, 99999)); // WHAT ARE THE NUMBERS!!!
@@ -70,7 +71,6 @@ public class ApriltagSubsystem extends SubsystemBase {
     FieldObject2d limelightPose = field.getObject("Apriltag Pose");
     limelightPose.setPose(mt2.pose);
 
-    SmartDashboard.putData("Apritag Pose", );
     SmartDashboard.putData("Pose", field);
   }
 
