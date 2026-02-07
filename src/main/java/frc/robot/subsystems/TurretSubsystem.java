@@ -31,14 +31,14 @@ public class TurretSubsystem extends SubsystemBase  {
     
     // The PID Controller for the turret motor
     var slot0Configs = new Slot0Configs();
-    slot0Configs.kP = 50; // An error of 1 rotation results in 2.4 V output
+    slot0Configs.kP = 40; // An error of 1 rotation results in 2.4 V output
     slot0Configs.kI = 0; // no output for integrated error
     slot0Configs.kD = 0; // A velocity of 1 rps results in 0.1 V output
 
     motor.getConfigurator().apply(slot0Configs);
 
-    // 20 to 1 gear ratio
-    double gearRatio = 20.0;
+    // 15 to 1 gear ratio
+    double gearRatio = 15.0;
 
     // Turns on continuos wrap for the turret
     var closedLoopGeneral = new ClosedLoopGeneralConfigs();

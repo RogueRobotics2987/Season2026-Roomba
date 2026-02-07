@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 
 public class ApriltagSubsystem extends SubsystemBase {
  
@@ -39,8 +40,8 @@ public class ApriltagSubsystem extends SubsystemBase {
     // System.out.println("Yeah Periodic");
 
     // This method will be called once per scheduler run.
-    LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
     LimelightHelpers.SetRobotOrientation("limelight", AT_driveTrain.getPigeon2().getRotation2d().getDegrees(), 0, 0, 0, 0, 0);
+    LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
 
     // if (Math.abs(AT_driveTrain.get()) > 360) {
     //   rejectUpdate = true;
@@ -55,16 +56,21 @@ public class ApriltagSubsystem extends SubsystemBase {
     }
 
     if (!rejectUpdate) {
-      AT_driveTrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5,9999999));
+      AT_driveTrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5,.5, 99999)); // WHAT ARE THE NUMBERS!!!
       AT_driveTrain.addVisionMeasurement(mt2.pose, mt2.timestampSeconds);
       System.out.println("Yippee");
 
       SmartDashboard.putNumber("Limelight X", mt2.pose.getX());
-      SmartDashboard.putNumber("LimelightY", mt2.pose.getY());
+      SmartDashboard.putNumber("Limelight Y", mt2.pose.getY());
       SmartDashboard.putNumber("Limelight Rotation", mt2.pose.getRotation().getDegrees());
     }  
 
     field.setRobotPose((AT_driveTrain.getState().Pose));
+
+    FieldObject2d limelightPose = field.getObject("Apriltag Pose");
+    limelightPose.setPose(mt2.pose);
+
+    SmartDashboard.putData("Apritag Pose", );
     SmartDashboard.putData("Pose", field);
   }
 
