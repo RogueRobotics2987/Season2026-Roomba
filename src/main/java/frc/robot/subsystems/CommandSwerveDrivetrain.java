@@ -9,7 +9,7 @@ import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
+import com.ctre.phoenix6.Orchestra;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -104,6 +104,30 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             this
         )
     );
+    private Orchestra m_orchestra;
+    public void InitOrchestra(){
+        m_orchestra = new Orchestra();
+
+        // Add a single device to the orchestra
+        
+        m_orchestra.addInstrument(getModules()[0].getDriveMotor());
+
+        // Attempt to load the chrp
+        var status = m_orchestra.loadMusic("music.chrp");
+
+        if (!status.isOK()) {
+        // log error
+        System.out.println("Failed to init orchestra");
+        }
+    }
+
+    public void playMusic(){
+        m_orchestra.play();
+    }
+
+    public void stopMusic(){
+        m_orchestra.stop();
+    }
 
     /* The SysId routine to test */
     private SysIdRoutine m_sysIdRoutineToApply = m_sysIdRoutineTranslation;
@@ -126,6 +150,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         if (Utils.isSimulation()) {
             startSimThread();
         }
+        InitOrchestra();
     }
 
     /**
@@ -150,6 +175,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         if (Utils.isSimulation()) {
             startSimThread();
         }
+        InitOrchestra();
     }
 
     /**
@@ -182,6 +208,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         if (Utils.isSimulation()) {
             startSimThread();
         }
+        InitOrchestra();
     }
 
     /**

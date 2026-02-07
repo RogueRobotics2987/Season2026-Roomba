@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+//our drive motor canID's are TunerConstants
 
 /** Add your docs here. */
 public class Constants {
