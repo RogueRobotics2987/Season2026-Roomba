@@ -116,7 +116,7 @@ public class TurretSubsystem extends SubsystemBase  {
       double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
       // Calculates the turret angle for the Blue Hub in rads and outputs the numbers to SmartDashboard
-      double turretAngleGlobal = -(Math.atan2(yHubDifference, xHubDifference)) + RobotYawRad;
+      double turretAngleGlobal = (Math.atan2(yHubDifference, xHubDifference)) + RobotYawRad;
       SmartDashboard.putNumber("rad Turret Angle Hub", turretAngleGlobal);
 
       // Calculates the turret angle for Passing Blue Left in rads and outputs the numbers to SmartDashboard
