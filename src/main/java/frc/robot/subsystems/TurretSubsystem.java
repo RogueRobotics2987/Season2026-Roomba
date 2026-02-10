@@ -18,8 +18,10 @@ import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,11 +30,18 @@ public class TurretSubsystem extends SubsystemBase  {
 
   private CommandSwerveDrivetrain T_driveTrain;
   private final TalonFX motor = new TalonFX(20, "rio");
+  private DigitalInput limitSwitch;
  
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem(CommandSwerveDrivetrain T_driveTrain) {
     this.T_driveTrain = T_driveTrain;
     
+    // Sets motor to brake mode
+    motor.setNeutralMode(NeutralModeValue.Brake);
+
+    // Sets limit switch to DIO port 0
+    limitSwitch = new DigitalInput(0);
+
     // The PID Controller for the turret motor
     var slot0Configs = new Slot0Configs();
     slot0Configs.kP = 20; // An error of 1 rotation results in 2.4 V output
@@ -58,6 +67,8 @@ public class TurretSubsystem extends SubsystemBase  {
   @Override
   public void periodic() {
 
+    boolean isPressed = limitSwitch.get();
+    SmartDashboard.putBoolean("Limmit Switch", isPressed);
     
     Optional<Alliance> ally = DriverStation.getAlliance();
 
@@ -78,20 +89,43 @@ public class TurretSubsystem extends SubsystemBase  {
         double xRedHubDifference = Constants.redHubX - TurretXGlobal;
         double yRedHubDifference = Constants.redHubY - TurretYGlobal;
 
+        // Calculates the difference in the X, Y for the Red Passing Left
+        double xRedPassLeftDifference = Constants.redPassLeftX - TurretXGlobal;
+        double yRedPassLeftDifference = Constants.redPassLeftY - TurretXGlobal;
+
+        // Calculates the difference in the X, Y for the Red Passing Right
+        double xRedPassRightDifference = Constants.redPassRightX - TurretXGlobal;
+        double yRedPassRightDifference = Constants.redPassRightY - TurretXGlobal;
+
         // Calculates the turret angle for the Red Hub in rads and outputs the numbers to SmartDashboard
         double turretAngleGlobal = -(Math.atan2(yRedHubDifference, xRedHubDifference)) + RobotYawRad;
-        SmartDashboard.putNumber("rad Turret Angle Hub", turretAngleGlobal);
+        SmartDashboard.putNumber("rad Turret Angle Red Hub", turretAngleGlobal);
+        
+        // Calculates the turret angle for Passing Blue Left in rads and outputs the numbers to SmartDashboard
+        double turretAnglePassLeft = -(Math.atan2(yRedPassLeftDifference, xRedPassLeftDifference)) + RobotYawRad;
+        SmartDashboard.putNumber("Turret Angle Red Pass Left", turretAnglePassLeft);
+
+        // Calculates the turret angle for Passing Blue Right in rads and outputs the numbers to SmartDashboard
+        double turretAnglePassRight = -(Math.atan2(yRedPassRightDifference, xRedPassRightDifference)) + RobotYawRad;
+        SmartDashboard.putNumber("Turret Angle Red Pass Right", turretAnglePassRight);
 
         // Converts the turret angle in rads to motor rotation
         double rotations = turretAngleGlobal / (2 * Math.PI);
         SmartDashboard.putNumber("Rotations", rotations);
 
-        // This is setting the position in rotations, so pass the converted value in.
-        final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
-        motor.setControl(m_request.withPosition(rotations));
-        SmartDashboard.putNumber("Turret angle setpoint", rotations);
-        SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
+        // if the limit switch is press then it stops the motor
+        if (isPressed == true) {
+          motor.set(0);
+        }
 
+        // else continues to move the motor
+        else {
+          // This is setting the position in rotations, so pass the converted value in.
+          final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
+          motor.setControl(m_request.withPosition(rotations));
+          SmartDashboard.putNumber("Turret angle setpoint", rotations);
+          SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
+        }
     }
 
     if (ally.get() == Alliance.Blue) {
@@ -110,38 +144,46 @@ public class TurretSubsystem extends SubsystemBase  {
       double xHubDifference = Constants.blueHubX - TurretXGlobal;
       double yHubDifference = Constants.blueHubY - TurretYGlobal;
 
-      // Calculates the difference in the X, Y for the Passing Blue Left
-      double xPassLeftDifference = Constants.bluePassLeftX - TurretXGlobal;
-      double yPassLeftDifference = Constants.bluePassLeftY - TurretXGlobal;
+      // Calculates the difference in the X, Y for the Blue Passing Left
+      double xBluePassLeftDifference = Constants.bluePassLeftX - TurretXGlobal;
+      double yBluePassLeftDifference = Constants.bluePassLeftY - TurretXGlobal;
 
-      // Calculates the difference in the X, Y for the Passing Blue Right
-      double xPassRightDifference = Constants.bluePassRightX - TurretXGlobal;
-      double yPassRightDifference = Constants.bluePassRightY - TurretXGlobal;
+      // Calculates the difference in the X, Y for the Blue Passing Right
+      double xBluePassRightDifference = Constants.bluePassRightX - TurretXGlobal;
+      double yBluePassRightDifference = Constants.bluePassRightY - TurretXGlobal;
 
       // Calculates the turret angle for the Blue Hub in rads and outputs the numbers to SmartDashboard
       double turretAngleGlobal = -(Math.atan2(yHubDifference, xHubDifference)) + RobotYawRad;
-      SmartDashboard.putNumber("rad Turret Angle Hub", turretAngleGlobal);
+      SmartDashboard.putNumber("rad Turret Angle Blue Hub", turretAngleGlobal);
 
       // Calculates the turret angle for Passing Blue Left in rads and outputs the numbers to SmartDashboard
-      double turretAnglePassLeft = -(Math.atan2(yPassLeftDifference, xPassLeftDifference)) + RobotYawRad;
-      SmartDashboard.putNumber("Turret Angle Pass Left", turretAnglePassLeft);
+      double turretAnglePassLeft = -(Math.atan2(yBluePassLeftDifference, xBluePassLeftDifference)) + RobotYawRad;
+      SmartDashboard.putNumber("Turret Angle Blue Pass Left", turretAnglePassLeft);
 
       // Calculates the turret angle for Passing Blue Right in rads and outputs the numbers to SmartDashboard
-      double turretAnglePassRight = -(Math.atan2(yPassRightDifference, xPassRightDifference)) + RobotYawRad;
-      SmartDashboard.putNumber("Turret Angle Pass Right", turretAnglePassRight);
+      double turretAnglePassRight = -(Math.atan2(yBluePassRightDifference, xBluePassRightDifference)) + RobotYawRad;
+      SmartDashboard.putNumber("Turret Angle Blue Pass Right", turretAnglePassRight);
 
       // Converts the turret angle in rads to motor rotation
       double rotations = turretAngleGlobal / (2 * Math.PI);
       SmartDashboard.putNumber("Rotations", rotations);
 
-      // This is setting the position in rotations, so pass the converted value in.
-      final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
-      motor.setControl(m_request.withPosition(rotations));
-      SmartDashboard.putNumber("Turret angle setpoint", rotations);
-      SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
+      // if the limit switch is press then it stops the motor
+      if (isPressed == true) {
+        motor.set(0);
+      }
 
+      // else continues to move the motor
+      else {
+        // This is setting the position in rotations, so pass the converted value in.
+        final PositionVoltage m_request = new PositionVoltage(0).withSlot(0); //leave pos blank
+        motor.setControl(m_request.withPosition(rotations));
+        SmartDashboard.putNumber("Turret angle setpoint", rotations);
+        SmartDashboard.putNumber("PID output", motor.getClosedLoopOutput().getValueAsDouble());
+      }
     }
-    //else no color
+
+    // else no color
     // else {
 
     //   // Gets Robot X, Y, Yaw

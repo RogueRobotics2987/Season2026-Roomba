@@ -7,19 +7,28 @@ package frc.robot;
 /** Add your docs here. */
 public class Constants {
 
-    // The X, Y coordinates for the Blue Hub in meters
-    public static final double blueHubX = 4.620;
-    public static final double blueHubY = 4.035;
-
     // The X, Y coordinates for the Red Hub in meters
     public static final double redHubX = 11.920;
     public static final double redHubY = 4.035;
 
-    // The X, Y coordinates for Passing Left in meters
+    // The X, Y coordinates for Red Passing Left in meters
+    public static final double redPassLeftX = 14.500;
+    public static final double redPassLeftY = 6.600;
+
+    // The X, Y coordinates for Red Passing Right in meters
+    public static final double redPassRightX = 14.500;
+    public static final double redPassRightY = 1.500;
+
+
+    // The X, Y coordinates for the Blue Hub in meters
+    public static final double blueHubX = 4.620;
+    public static final double blueHubY = 4.035;
+
+    // The X, Y coordinates for Blue Passing Left in meters
     public static final double bluePassLeftX = 2.000; 
     public static final double bluePassLeftY = 6.600; 
 
-    // The X, Y coordinates for Passing Right in meters
+    // The X, Y coordinates for Blue Passing Right in meters
     public static final double bluePassRightX = 2.000;
     public static final double bluePassRightY = 1.500;
     
