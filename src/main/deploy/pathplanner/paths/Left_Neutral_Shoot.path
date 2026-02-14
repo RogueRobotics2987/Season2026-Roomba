@@ -3,60 +3,68 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.62,
-        "y": 7.74
+        "x": 7.71,
+        "y": 4.36
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9461258428785397,
-        "y": 7.515843238712983
+        "x": 7.69766779713648,
+        "y": 4.6096956482851335
       },
       "isLocked": false,
-      "linkedName": "Left_Start"
+      "linkedName": "Neutral_Left_End"
     },
     {
       "anchor": {
-        "x": 0.6713555555533945,
-        "y": 6.876933333329069
+        "x": 4.510988888888889,
+        "y": 7.461444444444444
       },
       "prevControl": {
-        "x": 0.7653098982303506,
-        "y": 7.911071604811472
+        "x": 6.455949007890714,
+        "y": 7.491598864894084
       },
       "nextControl": {
-        "x": 0.46962884039725794,
-        "y": 4.656564262783106
+        "x": 3.210955555555555,
+        "y": 7.441288888888889
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.314,
-        "y": 3.521033333328294
+        "x": 3.06,
+        "y": 7.461444444444444
       },
       "prevControl": {
-        "x": 1.5916324680847707,
-        "y": 4.973038456412104
+        "x": 3.7251333333333334,
+        "y": 7.471522222222222
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left_Shoot_End"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Trench",
+      "minWaypointRelativePos": 0.7803738317756961,
+      "maxWaypointRelativePos": 1.2040498442367558,
+      "constraints": {
+        "maxVelocity": 1.5,
+        "maxAcceleration": 1.5,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Ball Intake",
-      "waypointRelativePos": 1.098560354374317,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "shoot",
-      "waypointRelativePos": 1.9401993355481728,
+      "name": "Shoot",
+      "waypointRelativePos": 2.0,
       "endWaypointRelativePos": null,
       "command": null
     }
