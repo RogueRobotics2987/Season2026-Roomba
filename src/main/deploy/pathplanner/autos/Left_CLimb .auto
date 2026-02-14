@@ -13,19 +13,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LeftTren_Climb"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Climb_Left"
+            "pathName": null
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "2nd Path",
+  "folder": null,
   "choreoAuto": false
 }

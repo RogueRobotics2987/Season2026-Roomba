@@ -3,18 +3,10 @@
   "robotLength": 0.762,
   "holonomicMode": true,
   "pathFolders": [
-    "Folder 1",
-    "Folder 2",
-    "Folder 3",
     "Climb",
-    "Connecting_Paths",
-    "Depot",
-    "Neutral_Zone",
-    "Under_Bridge",
-    "Outpost",
-    "Shooting",
-    "Starting_Zones",
-    "practice"
+    "Intake",
+    "Shoot",
+    "Starting Spots"
   ],
   "autoFolders": [
     "1st Path",

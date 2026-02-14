@@ -3,35 +3,56 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.330466666666668,
-        "y": 4.5792
+        "x": 3.62,
+        "y": 7.73
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.94751111111111,
-        "y": 8.146733333333334
+        "x": 4.62,
+        "y": 7.73
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left_Start"
     },
     {
       "anchor": {
-        "x": 3.402433333333333,
-        "y": 7.390899999994961
+        "x": 7.71,
+        "y": 7.05
       },
       "prevControl": {
-        "x": 2.914471495509075,
-        "y": 7.516587140040603
+        "x": 6.71,
+        "y": 7.049999999999999
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Neutral_Left_Intake"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Trench",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.44937694704049336,
+      "constraints": {
+        "maxVelocity": 1.5,
+        "maxAcceleration": 1.5,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Ball Intake",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -45,23 +66,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Under_Bridge",
-  "idealStartingState": {
-    "velocity": 0,
-    "rotation": 143.44752724790848
-  },
-  "useDefaultConstraints": true
-}0.0,
-    "maxAngularAcceleration": 720.0,
-    "nominalVoltage": 12.0,
-    "unlimited": false
-  },
-  "goalEndState": {
-    "velocity": 0,
-    "rotation": 0.0
-  },
-  "reversed": false,
-  "folder": "Neutral_Zone",
+  "folder": "Intake",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

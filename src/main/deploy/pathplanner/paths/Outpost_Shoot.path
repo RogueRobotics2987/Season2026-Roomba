@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.49,
-        "y": 1.74
+        "x": 0.4294888888838506,
+        "y": 0.5682444444494807
       },
       "prevControl": {
-        "x": 0.5023416813358853,
-        "y": 0.6314766041462891
+        "x": -0.5581694297802641,
+        "y": -0.5402789514042301
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 1.105468126088663
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Outpost",
+  "folder": "Shoot",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

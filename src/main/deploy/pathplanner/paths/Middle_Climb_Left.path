@@ -3,36 +3,36 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.162866666666667,
-        "y": 3.9112692763938313
+        "x": 3.62,
+        "y": 4.02
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.162866666666667,
-        "y": 4.911269276393831
+        "x": 3.869961923789098,
+        "y": 4.015636898390678
       },
       "isLocked": false,
-      "linkedName": "Depot_Intake_Start"
+      "linkedName": "Middle_Start"
     },
     {
       "anchor": {
-        "x": 0.8930666666666667,
-        "y": 7.1188
+        "x": 1.43,
+        "y": 4.13
       },
       "prevControl": {
-        "x": 0.8930666666666663,
-        "y": 5.1188
+        "x": 1.68,
+        "y": 4.13
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot_Intake_End"
+      "linkedName": "Climb_Left"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
-      "name": "Intake",
-      "minWaypointRelativePos": 0.0,
+      "name": "Approach Climber",
+      "minWaypointRelativePos": 0.57,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.5,
@@ -45,7 +45,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Climb",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -59,10 +66,10 @@
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Depot",
+  "folder": "Climb",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

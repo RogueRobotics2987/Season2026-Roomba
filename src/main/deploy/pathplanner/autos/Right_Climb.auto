@@ -13,19 +13,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Central-Shoot_RightClimb"
+            "pathName": "Middle_Climb_Right"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Climb_Right"
+            "pathName": "Middle_Climb_Left"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "4th Path",
+  "folder": null,
   "choreoAuto": false
 }

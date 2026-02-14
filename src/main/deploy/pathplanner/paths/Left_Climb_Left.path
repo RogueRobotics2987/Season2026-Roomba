@@ -4,59 +4,51 @@
     {
       "anchor": {
         "x": 3.62,
-        "y": 7.74
+        "y": 7.73
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9461258428785397,
-        "y": 7.515843238712983
+        "x": 3.4629000000000003,
+        "y": 7.3203555555555555
       },
       "isLocked": false,
       "linkedName": "Left_Start"
     },
     {
       "anchor": {
-        "x": 0.6713555555533945,
-        "y": 6.876933333329069
+        "x": 1.43,
+        "y": 4.14
       },
       "prevControl": {
-        "x": 0.7653098982303506,
-        "y": 7.911071604811472
-      },
-      "nextControl": {
-        "x": 0.46962884039725794,
-        "y": 4.656564262783106
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.314,
-        "y": 3.521033333328294
-      },
-      "prevControl": {
-        "x": 1.5916324680847707,
-        "y": 4.973038456412104
+        "x": 1.7597555555555555,
+        "y": 4.804611111111096
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Climb_Left"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7204049844236657,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.5,
+        "maxAcceleration": 1.5,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Ball Intake",
-      "waypointRelativePos": 1.098560354374317,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "shoot",
-      "waypointRelativePos": 1.9401993355481728,
+      "name": "Climb",
+      "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -71,10 +63,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Shoot",
+  "folder": "Climb",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

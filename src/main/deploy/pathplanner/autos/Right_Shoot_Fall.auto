@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Shoot_neturalIntake_Connecting"
+            "pathName": null
           }
         },
         {
@@ -44,6 +44,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "1st Path",
+  "folder": null,
   "choreoAuto": false
 }

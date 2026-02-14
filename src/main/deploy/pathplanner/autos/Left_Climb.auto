@@ -13,19 +13,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Central-Shoot_LeftClimb"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Climb_Left"
+            "pathName": null
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "4th Path",
+  "folder": null,
   "choreoAuto": false
 }

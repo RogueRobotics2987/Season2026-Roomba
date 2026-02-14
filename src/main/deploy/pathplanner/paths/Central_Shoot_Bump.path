@@ -20,7 +20,7 @@
         "y": 2.423
       },
       "prevControl": {
-        "x": 2.1729444444409256,
+        "x": 2.172944444440926,
         "y": 3.9140666666629658
       },
       "nextControl": null,
@@ -45,7 +45,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Connecting_Paths",
+  "folder": "Shoot",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

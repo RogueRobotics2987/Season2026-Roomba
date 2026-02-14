@@ -14,6 +14,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "3rd Path",
+  "folder": null,
   "choreoAuto": false
 }
