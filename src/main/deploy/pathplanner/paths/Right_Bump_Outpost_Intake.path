@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.62,
-        "y": 4.02
+        "x": 3.5939111111111117,
+        "y": 2.4628666666666663
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.838077777777778,
-        "y": 3.077611111111112
+        "x": 2.5055111111111112,
+        "y": 1.7271888888888898
       },
       "isLocked": false,
-      "linkedName": "Middle_Start"
+      "linkedName": "Right_Start_Bump"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 0.67
       },
       "prevControl": {
-        "x": 2.1024000000000003,
-        "y": 1.4953999999999996
+        "x": 1.205477777770579,
+        "y": 0.941122222223687
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,8 +31,8 @@
   "rotationTargets": [],
   "constraintZones": [
     {
-      "name": "Approach Outpost",
-      "minWaypointRelativePos": 0.66,
+      "name": "Outpost",
+      "minWaypointRelativePos": 0.634735202492212,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.5,
@@ -66,10 +66,10 @@
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Intake Trench",
+  "folder": "Intake Bump",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 47.06474685063103
   },
   "useDefaultConstraints": true
 }

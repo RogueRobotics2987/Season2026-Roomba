@@ -4,12 +4,15 @@
   "holonomicMode": true,
   "pathFolders": [
     "Climb",
-    "Intake",
     "Extra",
+    "Intake Trench",
+    "Intake Bump",
     "Shoot",
     "Starting Spots"
   ],
   "autoFolders": [
+    "Shoot_Intake",
+    "Shoot",
     "Test"
   ],
   "defaultMaxVel": 3.0,
