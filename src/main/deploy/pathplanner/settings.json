@@ -8,13 +8,7 @@
     "Shoot",
     "Starting Spots"
   ],
-  "autoFolders": [
-    "1st Path",
-    "2nd Path",
-    "3rd Path",
-    "4th Path",
-    "5th path"
-  ],
+  "autoFolders": [],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

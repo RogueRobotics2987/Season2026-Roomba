@@ -20,16 +20,45 @@
         "y": 7.07
       },
       "prevControl": {
-        "x": 3.6039888888888894,
-        "y": 7.71338888888889
+        "x": 0.38906726927694063,
+        "y": 7.319760836399419
+      },
+      "nextControl": {
+        "x": 0.4109327307230594,
+        "y": 6.820239163600582
+      },
+      "isLocked": false,
+      "linkedName": "Depot_Left"
+    },
+    {
+      "anchor": {
+        "x": 0.4,
+        "y": 5.39
+      },
+      "prevControl": {
+        "x": 0.3985280156732039,
+        "y": 5.639995666486724
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot_Left"
+      "linkedName": "Depot_Right_End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
+    {
+      "name": "Intake",
+      "minWaypointRelativePos": 0.7087227414330219,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
     {
       "name": "Approach Depot",
       "minWaypointRelativePos": 0.8668224299065417,
@@ -47,9 +76,15 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Ball Intake",
+      "name": "Extend Intake",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Ball Intake",
+      "waypointRelativePos": 1.4096573208722678,
+      "endWaypointRelativePos": 2.0,
       "command": null
     }
   ],

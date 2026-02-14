@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3140333333333336,
-        "y": 4.599355555555555
+        "x": 2.0923222222224602,
+        "y": 6.211800000003178
       },
       "isLocked": false,
       "linkedName": "Right_Start"
@@ -17,19 +17,53 @@
     {
       "anchor": {
         "x": 0.4,
-        "y": 4.84
+        "y": 4.85
       },
       "prevControl": {
-        "x": 3.0396333333333336,
-        "y": 4.841222222222223
+        "x": 0.4252145838313824,
+        "y": 4.601274800709276
+      },
+      "nextControl": {
+        "x": 0.3747854161686176,
+        "y": 5.098725199290723
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.4,
+        "y": 6.54
+      },
+      "prevControl": {
+        "x": 0.4093333333335708,
+        "y": 5.869155555558734
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot_Right"
+      "linkedName": "Depot_Left_End"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [
+    {
+      "name": "Intake",
+      "minWaypointRelativePos": 1.3909657320872286,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
     {
       "name": "Approach Depot",
       "minWaypointRelativePos": 0.6503115264797499,
@@ -47,9 +81,15 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Ball Intake",
+      "name": "Extend Intake",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Ball Intake",
+      "waypointRelativePos": 1.484423676012459,
+      "endWaypointRelativePos": 2.0,
       "command": null
     }
   ],
